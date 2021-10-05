@@ -75,7 +75,7 @@ while running:
                 playerX_change = -playerX_speed
             if event.key == pygame.K_RIGHT:
                 playerX_change = playerX_speed
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE and bullet_state == "ready":
                 bulletX = playerX
                 fire_bullet(bulletX, playerY)
         if event.type == pygame.KEYUP:
