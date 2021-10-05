@@ -70,8 +70,10 @@ while running:
     # Enemy boundary X
     if enemyX <= 0:
         enemyX_change = enemyX_speed
+        enemyY += enemyY_speed
     elif enemyX >= SCREEN_WIDTH-enemyImg.get_width():
         enemyX_change = -enemyX_speed
+        enemyY += enemyY_speed
     # Enemy moviment
     enemyX += enemyX_change
     
