@@ -42,7 +42,8 @@ def show_score():
     screen.blit(render, (textX, textY))
 
 def game_over_text():
-    over_text: Surface = font.render("GAME OVER", True, (255,0,0))
+    over_font = pygame.font.Font("freesansbold.ttf", 70)
+    over_text: Surface = over_font.render("GAME OVER", True, (255,0,0))
     screen.blit(over_text, (SCREEN_WIDTH/2-over_text.get_width()/2, SCREEN_HEIGHT/2-over_text.get_height()/2))
 
 # Bullet
