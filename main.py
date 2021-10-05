@@ -49,6 +49,7 @@ bulletY_speed = 6
 # ready = invisible
 # fire = moving
 bullet_state = "ready"
+bullet_sound = mixer.Sound("assets/laser.wav")
 
 def fire_bullet(x,y):
     global bullet_state
@@ -115,6 +116,7 @@ while running:
             if event.key == pygame.K_SPACE and bullet_state == "ready":
                 bulletX = playerX
                 fire_bullet(bulletX, playerY)
+                bullet_sound.play()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
