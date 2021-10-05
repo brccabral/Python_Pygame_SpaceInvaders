@@ -20,8 +20,16 @@ playerY = 480
 playerX_change = 0
 speed = 0.3
 
+# Enemy
+enemyImg = pygame.image.load("assets/enemy.png")
+enemyX = SCREEN_WIDTH/2-enemyImg.get_width()/2
+enemyY = 120
+
 def player(x,y):
     screen.blit(playerImg, (x, y))
+
+def enemy(x,y):
+    screen.blit(enemyImg, (x, y))
 
 # Game loop
 running = True
@@ -52,4 +60,5 @@ while running:
         playerX = SCREEN_WIDTH-playerImg.get_width()
     
     player(playerX, playerY)
+    enemy(enemyX, enemyY)
     pygame.display.update()
