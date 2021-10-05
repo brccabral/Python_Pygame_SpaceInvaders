@@ -76,6 +76,7 @@ enemyImg = []
 enemyX = []
 enemyY = []
 enemyX_change = []
+enemy_explosion = mixer.Sound("assets/explosion.wav")
 
 change = 0
 while change == 0:
@@ -138,6 +139,7 @@ while running:
                 bullet_state = "ready"
                 score += 1
                 enemyX[i], enemyY[i] = enemy_position(i)
+                enemy_explosion.play()
     if bulletY <= 0:
         bulletY = playerY+10
         bullet_state = "ready"
