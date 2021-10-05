@@ -76,7 +76,8 @@ while running:
             if event.key == pygame.K_RIGHT:
                 playerX_change = playerX_speed
             if event.key == pygame.K_SPACE:
-                fire_bullet(playerX, playerY)
+                bulletX = playerX
+                fire_bullet(bulletX, playerY)
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
@@ -90,7 +91,7 @@ while running:
     
     # Bullet movement
     if bullet_state == "fire":
-        fire_bullet(playerX, bulletY)
+        fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_speed
 
     # Enemy boundary X
