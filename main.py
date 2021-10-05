@@ -1,3 +1,5 @@
+
+import random
 import pygame
 
 # Initialize the pygame
@@ -22,8 +24,8 @@ speed = 0.3
 
 # Enemy
 enemyImg = pygame.image.load("assets/enemy.png")
-enemyX = SCREEN_WIDTH/2-enemyImg.get_width()/2
-enemyY = 120
+enemyX = random.randint(0,SCREEN_WIDTH-enemyImg.get_width())
+enemyY = random.randint(0, 150)
 
 def player(x,y):
     screen.blit(playerImg, (x, y))
