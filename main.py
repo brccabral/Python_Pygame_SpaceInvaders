@@ -3,8 +3,10 @@ import pygame
 # Initialize the pygame
 pygame.init()
 
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
 # create the screen
-screen = pygame.display.set_mode((800,600))
+screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 # Title and Icon
 pygame.display.set_caption("Space Invaders")
@@ -13,7 +15,7 @@ pygame.display.set_icon(icon)
 
 # Player
 playerImg = pygame.image.load("assets/player.png")
-playerX = 370
+playerX = SCREEN_WIDTH/2-playerImg.get_width()/2
 playerY = 480
 playerX_change = 0
 speed = 0.3
@@ -43,5 +45,11 @@ while running:
                 playerX_change = 0
     
     playerX += playerX_change
+    # border limit on X
+    if playerX <= 0:
+        playerX = 0
+    elif playerX >= SCREEN_WIDTH-playerImg.get_width():
+        playerX = SCREEN_WIDTH-playerImg.get_width()
+    
     player(playerX, playerY)
     pygame.display.update()
