@@ -20,12 +20,15 @@ playerImg = pygame.image.load("assets/player.png")
 playerX = SCREEN_WIDTH/2-playerImg.get_width()/2
 playerY = 480
 playerX_change = 0
-speed = 0.3
+playerX_speed = 0.3
 
 # Enemy
 enemyImg = pygame.image.load("assets/enemy.png")
 enemyX = random.randint(0,SCREEN_WIDTH-enemyImg.get_width())
 enemyY = random.randint(0, 150)
+enemyX_speed = 0.25
+enemyX_change = enemyX_speed
+enemyY_speed = 40 # pixels
 
 def player(x,y):
     screen.blit(playerImg, (x, y))
@@ -47,9 +50,9 @@ while running:
         # move player left and right
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                playerX_change = -speed
+                playerX_change = -playerX_speed
             if event.key == pygame.K_RIGHT:
-                playerX_change = speed
+                playerX_change = playerX_speed
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
@@ -60,6 +63,14 @@ while running:
         playerX = 0
     elif playerX >= SCREEN_WIDTH-playerImg.get_width():
         playerX = SCREEN_WIDTH-playerImg.get_width()
+
+    # Enemy boundary X
+    if enemyX <= 0:
+        enemyX_change = enemyX_speed
+    elif enemyX >= SCREEN_WIDTH-enemyImg.get_width():
+        enemyX_change = -enemyX_speed
+    # Enemy moviment
+    enemyX += enemyX_change
     
     player(playerX, playerY)
     enemy(enemyX, enemyY)
