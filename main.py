@@ -2,7 +2,7 @@
 import random
 import math
 import pygame
-from pygame import mixer
+from pygame import Surface, mixer
 
 # Initialize the pygame
 pygame.init()
@@ -40,6 +40,10 @@ textY = 10
 def show_score():
     render = font.render("Score: "+ str(score), True, (255,255,255))
     screen.blit(render, (textX, textY))
+
+def game_over_text():
+    over_text: Surface = font.render("GAME OVER", True, (255,0,0))
+    screen.blit(over_text, (SCREEN_WIDTH/2-over_text.get_width()/2, SCREEN_HEIGHT/2-over_text.get_height()/2))
 
 # Bullet
 bulletImg = pygame.image.load("assets/bullet.png")
@@ -146,6 +150,16 @@ while running:
 
     # Enemy boundary X
     for i in range(number_of_enemies):
+
+        # Game Over
+        if enemyY[i] > SCREEN_HEIGHT - playerImg.get_height():
+            # hide enemies from screen
+            for j in range(number_of_enemies):
+                enemyY[j] = 2000
+            game_over_text()
+            break
+
+
         if enemyX[i] <= 0 or enemyX[i] >= SCREEN_WIDTH-enemyImg[i].get_width():
             enemyX_change[i] = -enemyX_change[i]
             enemyY[i] += enemyY_speed
