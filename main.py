@@ -43,8 +43,13 @@ def fire_bullet(x,y):
     screen.blit(bulletImg, (x+playerImg.get_width()/2,y+10))
 
 def isCollision(enemyX, enemyY , bulletX, bulletY):
-    distance = math.sqrt(math.pow(enemyX-bulletX,2)+math.pow(enemyY-bulletY,2))
-    return distance < 27
+    #distance = math.sqrt(math.pow(enemyX-bulletX,2)+math.pow(enemyY-bulletY,2))
+    #return distance < 27
+    
+    if enemyX <= bulletX+bulletImg.get_width()/2 <= enemyX+enemyImg.get_width():
+        if enemyY <= bulletY <= enemyY+enemyImg.get_height():
+            return True
+    return False
 
 # Enemy
 def enemy_position():
