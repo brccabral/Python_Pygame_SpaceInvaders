@@ -47,9 +47,11 @@ def isCollision(enemyX, enemyY , bulletX, bulletY):
     return distance < 27
 
 # Enemy
+def enemy_position():
+    return random.randint(0,SCREEN_WIDTH-enemyImg.get_width()), random.randint(0, 150)
+
 enemyImg = pygame.image.load("assets/enemy.png")
-enemyX = random.randint(0,SCREEN_WIDTH-enemyImg.get_width())
-enemyY = random.randint(0, 150)
+enemyX, enemyY = enemy_position()
 enemyX_speed = 4
 enemyX_change = 0
 while enemyX_change==0:
@@ -104,6 +106,7 @@ while running:
             bullet_state = "ready"
             score += 1
             print(score)
+            enemyX, enemyY = enemy_position()
     if bulletY <= 0:
         bulletY = playerY+10
         bullet_state = "ready"
