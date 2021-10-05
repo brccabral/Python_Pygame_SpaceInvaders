@@ -26,7 +26,15 @@ playerY = 480
 playerX_change = 0
 playerX_speed = 5
 
+# Score
 score = 0
+font = pygame.font.Font("freesansbold.ttf", 32)
+textX = 10
+textY = 10
+
+def show_score():
+    render = font.render("Score: "+ str(score), True, (255,255,255))
+    screen.blit(render, (textX, textY))
 
 # Bullet
 bulletImg = pygame.image.load("assets/bullet.png")
@@ -74,7 +82,6 @@ for i in range(number_of_enemies):
     enemyX.append(x)
     enemyY.append(y)
     enemyX_change.append(change)
-    
 
 def player(x,y):
     screen.blit(playerImg, (x, y))
@@ -123,7 +130,6 @@ while running:
                 bulletY = playerY+10
                 bullet_state = "ready"
                 score += 1
-                print(score)
                 enemyX[i], enemyY[i] = enemy_position(i)
     if bulletY <= 0:
         bulletY = playerY+10
@@ -142,5 +148,5 @@ while running:
         enemy(enemyX[i], enemyY[i], i)
 
     player(playerX, playerY)
-    
+    show_score()
     pygame.display.update()
