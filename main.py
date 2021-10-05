@@ -146,11 +146,8 @@ while running:
 
     # Enemy boundary X
     for i in range(number_of_enemies):
-        if enemyX[i] <= 0:
-            enemyX_change[i] = enemyX_speed
-            enemyY[i] += enemyY_speed
-        elif enemyX[i] >= SCREEN_WIDTH-enemyImg[i].get_width():
-            enemyX_change[i] = -enemyX_speed
+        if enemyX[i] <= 0 or enemyX[i] >= SCREEN_WIDTH-enemyImg[i].get_width():
+            enemyX_change[i] = -enemyX_change[i]
             enemyY[i] += enemyY_speed
         # Enemy moviment
         enemyX[i] += enemyX_change[i]
