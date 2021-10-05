@@ -93,6 +93,9 @@ while running:
     if bullet_state == "fire":
         fire_bullet(bulletX, bulletY)
         bulletY -= bulletY_speed
+    if bulletY <= 0:
+        bulletY = playerY+10
+        bullet_state = "ready"
 
     # Enemy boundary X
     if enemyX <= 0:
