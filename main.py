@@ -23,13 +23,13 @@ playerImg = pygame.image.load("assets/player.png")
 playerX = SCREEN_WIDTH/2-playerImg.get_width()/2
 playerY = 480
 playerX_change = 0
-playerX_speed = 0.3
+playerX_speed = 5
 
 # Enemy
 enemyImg = pygame.image.load("assets/enemy.png")
 enemyX = random.randint(0,SCREEN_WIDTH-enemyImg.get_width())
 enemyY = random.randint(0, 150)
-enemyX_speed = 0.25
+enemyX_speed = 4
 enemyX_change = 0
 while enemyX_change==0:
     enemyX_change = random.randint(-1,2)
