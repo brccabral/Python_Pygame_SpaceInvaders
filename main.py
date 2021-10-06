@@ -14,22 +14,24 @@ screen = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 
 # Title and Icon
 pygame.display.set_caption("Space Invaders")
-icon = pygame.image.load('assets/ufo.png')
+# .convert_alpha() loads the image into memory keeping transparency from PNG
+icon = pygame.image.load('assets/ufo.png').convert_alpha()
 pygame.display.set_icon(icon)
 
 # Background
-backgroundImg = pygame.image.load("assets/background.png")
+# convert() loads the image into memory, but removes transparency from PNG
+backgroundImg = pygame.image.load("assets/background.png").convert()
 
 # Background Sound
 mixer.music.load("assets/background.wav")
 mixer.music.play(-1)
 
 # Player
-playerImg = pygame.image.load("assets/player.png")
+playerImg = pygame.image.load("assets/player.png").convert_alpha()
 playerX = SCREEN_WIDTH/2-playerImg.get_width()/2
 playerY = 480
 playerX_change = 0
-playerX_speed = 5
+playerX_speed = 0.5
 
 # Score
 score = 0
@@ -47,10 +49,10 @@ def game_over_text():
     screen.blit(over_text, (SCREEN_WIDTH/2-over_text.get_width()/2, SCREEN_HEIGHT/2-over_text.get_height()/2))
 
 # Bullet
-bulletImg = pygame.image.load("assets/bullet.png")
+bulletImg = pygame.image.load("assets/bullet.png").convert_alpha()
 bulletX = playerX+playerImg.get_width()/2
 bulletY = playerY+10
-bulletY_speed = 6
+bulletY_speed = 0.4
 # ready = invisible
 # fire = moving
 bullet_state = "ready"
@@ -75,7 +77,7 @@ def enemy_position(i):
     return random.randint(0,SCREEN_WIDTH-enemyImg[i].get_width()), random.randint(0, 150)
 
 number_of_enemies = 6
-enemyX_speed = 4
+enemyX_speed = 0.2
 enemyY_speed = 40 # pixels
 enemyImg = []
 enemyX = []
@@ -89,7 +91,7 @@ while change == 0:
 change *= enemyX_speed
 
 for i in range(number_of_enemies):
-    enemyImg.append(pygame.image.load("assets/enemy.png"))
+    enemyImg.append(pygame.image.load("assets/enemy.png").convert_alpha())
     x, y = enemy_position(i)
     enemyX.append(x)
     enemyY.append(y)
