@@ -3,8 +3,19 @@ import random
 # import math
 import pygame
 from pygame import Surface, mixer
+import sys
 import os
 from sys import exit
+
+
+def resource_path(relative):
+    if os.name == "nt":
+        if hasattr(sys, "_MEIPASS"):
+            return resource_path(sys._MEIPASS, relative)
+        return resource_path(relative)
+    else:
+        return relative
+
 
 # Initialize the pygame
 pygame.init()
@@ -17,20 +28,20 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # Title and Icon
 pygame.display.set_caption("Space Invaders")
 # .convert_alpha() loads the image into memory keeping transparency from PNG
-icon = pygame.image.load(os.path.join("assets", "ufo.png")).convert_alpha()
+icon = pygame.image.load(resource_path("assets/ufo.png")).convert_alpha()
 pygame.display.set_icon(icon)
 clock = pygame.time.Clock()
 
 # Background
 # convert() loads the image into memory, but removes transparency from PNG
-backgroundImg = pygame.image.load(os.path.join("assets", "background.png")).convert()
+backgroundImg = pygame.image.load(resource_path("assets/background.png")).convert()
 
 # Background Sound
 mixer.music.load("assets/background.wav")
 mixer.music.play(-1)
 
 # Player
-playerImg = pygame.image.load(os.path.join("assets", "player.png")).convert_alpha()
+playerImg = pygame.image.load(resource_path("assets/player.png")).convert_alpha()
 playerX = SCREEN_WIDTH / 2 - playerImg.get_width() / 2
 playerY = 480
 playerX_change = 0
@@ -38,7 +49,7 @@ playerX_speed = 5
 
 # Score
 score = 0
-font = pygame.font.Font(os.path.join(".", "FreeSansBold.ttf"), 32)
+font = pygame.font.Font(resource_path("./FreeSansBold.ttf"), 32)
 textX = 10
 textY = 10
 
@@ -49,7 +60,7 @@ def show_score():
 
 
 def game_over_text():
-    over_font = pygame.font.Font(os.path.join(".", "FreeSansBold.ttf"), 70)
+    over_font = pygame.font.Font(resource_path("./FreeSansBold.ttf"), 70)
     over_text: Surface = over_font.render("GAME OVER", True, (255, 0, 0))
     screen.blit(
         over_text,
@@ -61,7 +72,7 @@ def game_over_text():
 
 
 # Bullet
-bulletImg = pygame.image.load(os.path.join("assets", "bullet.png")).convert_alpha()
+bulletImg = pygame.image.load(resource_path("assets/bullet.png")).convert_alpha()
 bulletX = playerX + playerImg.get_width() / 2
 bulletY = playerY + 10
 bulletY_speed = 4
@@ -110,7 +121,7 @@ change *= enemyX_speed
 
 for i in range(number_of_enemies):
     enemyImg.append(
-        pygame.image.load(os.path.join("assets", "enemy.png")).convert_alpha()
+        pygame.image.load(resource_path("assets/enemy.png")).convert_alpha()
     )
     x, y = enemy_position(i)
     enemyX.append(x)
