@@ -8,13 +8,11 @@ import os
 from sys import exit
 
 
+bundle_dir = getattr(sys, "_MEIPASS", os.path.abspath(os.path.dirname(__file__)))
+
+
 def resource_path(relative):
-    if os.name == "nt":
-        if hasattr(sys, "_MEIPASS"):
-            return resource_path(sys._MEIPASS, relative)
-        return resource_path(relative)
-    else:
-        return relative
+    return os.path.abspath(os.path.join(bundle_dir, relative))
 
 
 # Initialize the pygame
@@ -37,7 +35,7 @@ clock = pygame.time.Clock()
 backgroundImg = pygame.image.load(resource_path("assets/background.png")).convert()
 
 # Background Sound
-mixer.music.load("assets/background.wav")
+mixer.music.load(resource_path("assets/background.wav"))
 mixer.music.play(-1)
 
 # Player
@@ -79,7 +77,7 @@ bulletY_speed = 4
 # ready = invisible
 # fire = moving
 bullet_state = "ready"
-bullet_sound = mixer.Sound("assets/laser.wav")
+bullet_sound = mixer.Sound(resource_path("assets/laser.wav"))
 
 
 def fire_bullet(x, y):
@@ -112,7 +110,7 @@ enemyImg = []
 enemyX = []
 enemyY = []
 enemyX_change = []
-enemy_explosion = mixer.Sound("assets/explosion.wav")
+enemy_explosion = mixer.Sound(resource_path("assets/explosion.wav"))
 
 change = 0
 while change == 0:
@@ -158,7 +156,7 @@ while running:
             if event.key == pygame.K_SPACE and bullet_state == "ready":
                 bulletX = playerX
                 fire_bullet(bulletX, playerY)
-                bullet_sound.play()
+                # bullet_sound.play()
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerX_change = 0
@@ -180,7 +178,7 @@ while running:
                 bullet_state = "ready"
                 score += 1
                 enemyX[i], enemyY[i] = enemy_position(i)
-                enemy_explosion.play()
+                # enemy_explosion.play()
     if bulletY <= 0:
         bulletY = playerY + 10
         bullet_state = "ready"
