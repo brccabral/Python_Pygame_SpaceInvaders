@@ -19,6 +19,7 @@ pygame.display.set_caption("Space Invaders")
 # .convert_alpha() loads the image into memory keeping transparency from PNG
 icon = pygame.image.load(os.path.join("assets", "ufo.png")).convert_alpha()
 pygame.display.set_icon(icon)
+clock = pygame.time.Clock()
 
 # Background
 # convert() loads the image into memory, but removes transparency from PNG
@@ -33,7 +34,7 @@ playerImg = pygame.image.load(os.path.join("assets", "player.png")).convert_alph
 playerX = SCREEN_WIDTH / 2 - playerImg.get_width() / 2
 playerY = 480
 playerX_change = 0
-playerX_speed = 0.5
+playerX_speed = 5
 
 # Score
 score = 0
@@ -63,7 +64,7 @@ def game_over_text():
 bulletImg = pygame.image.load(os.path.join("assets", "bullet.png")).convert_alpha()
 bulletX = playerX + playerImg.get_width() / 2
 bulletY = playerY + 10
-bulletY_speed = 0.4
+bulletY_speed = 4
 # ready = invisible
 # fire = moving
 bullet_state = "ready"
@@ -94,7 +95,7 @@ def enemy_position(i):
 
 
 number_of_enemies = 6
-enemyX_speed = 0.2
+enemyX_speed = 2
 enemyY_speed = 40  # pixels
 enemyImg = []
 enemyX = []
@@ -194,3 +195,4 @@ while running:
     player(playerX, playerY)
     show_score()
     pygame.display.update()
+    clock.tick(60)
